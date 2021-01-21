@@ -29,6 +29,18 @@ RUN pip install --no-cache-dir jupyter_contrib_nbextensions \
   jupyter nbextension enable codefolding/main
 RUN jupyter labextension install @ijmbarr/jupyterlab_spellchecker
 
+# Install mesh libraries
+RUN pip install pytorch3d
+
+# Install audio libraries
+RUN pip install librosa>=0.7.2 gunicorn text-unidecode emoji
+
+# Install GCP libraries
+RUN pip install google-cloud>=0.34.0 google-cloud-speech>=1.3.2 \
+    google-cloud-storage>=1.28.1 google-cloud-language>=1.3.0 \
+    google-cloud-logging>=1.15.1 google-auth>=1.14.3 \
+    google-auth-oauthlib>=0.4.1
+
 RUN fix-permissions /home/$NB_USER
 
 # Switch back to jovyan to avoid accidental container runs as root
